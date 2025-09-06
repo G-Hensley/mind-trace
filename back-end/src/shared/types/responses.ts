@@ -1,11 +1,9 @@
 import type {
   UserDTO,
   ProfileDTO,
-  BehaviorCategoryDTO,
   BehaviorLogDTO,
   StudentDTO,
   OrganizationDTO,
-  Role,
   Intent,
 } from './dtos';
 
