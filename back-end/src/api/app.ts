@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { errorHandler } from '../middleware/error';
+import { config } from '@/config/env';
 
 export const createApp = () => {
   const app = express();
@@ -11,7 +12,7 @@ export const createApp = () => {
   app.use(helmet());
   app.use(
     cors({
-      origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+      origin: config.FRONTEND_URL,
       credentials: true,
     })
   );
