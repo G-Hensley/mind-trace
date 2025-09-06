@@ -1,4 +1,5 @@
 export type Intent = 'aggressive' | 'sensory';
+export type Role = 'admin' | 'user' | 'parent';
 
 export interface UserDTO {
   id: string;
@@ -11,7 +12,7 @@ export interface ProfileDTO {
   user_id: string;
   organization_id: string;
   avatar: string | null;
-  role: string;
+  role: Role;
   first_name: string;
   last_name: string;
   created_at: string;
@@ -49,4 +50,3 @@ export interface OrganizationDTO {
   id: string;
   name: string;
 }
-
