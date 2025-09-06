@@ -62,3 +62,8 @@ docs/
 
 # Storybook
 storybook-static/
+
+# md files
+*.md
+
+.prettierrc

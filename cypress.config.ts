@@ -1,4 +1,4 @@
-import { defineConfig } from 'cypress'
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
@@ -8,13 +8,13 @@ export default defineConfig({
     viewportWidth: 1280,
     viewportHeight: 720,
     video: false,
-    screenshotOnRunFailure: true
+    screenshotOnRunFailure: true,
   },
   component: {
     devServer: {
       framework: 'next',
-      bundler: 'webpack'
+      bundler: 'webpack',
     },
-    specPattern: 'cypress/component/**/*.{js,jsx,ts,tsx}'
-  }
-})
+    specPattern: 'cypress/component/**/*.{js,jsx,ts,tsx}',
+  },
+});
