@@ -2,7 +2,7 @@
 
 ## 🏗️ Architecture Setup
 - ✅ Set up DDD folder structure
-- [ ] Configure testing environment (Vitest + Cypress)
+- ✅ Configure testing environment (Vitest + Cypress)
 - [ ] Set up backend API structure
 - [ ] Configure Supabase connection in backend only
 - [ ] Set up shared types and validation schemas
