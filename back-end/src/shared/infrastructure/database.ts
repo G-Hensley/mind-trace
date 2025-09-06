@@ -22,6 +22,9 @@ class DatabaseConnection {
 
   // For testing purposes only
   public static setInstance(client: SupabaseClient) {
+    if (process.env.NODE_ENV !== 'test') {
+      throw new Error('setInstance can only be used in test environments');
+    }
     DatabaseConnection.instance = client;
   }
 }
