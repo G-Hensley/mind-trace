@@ -1,0 +1,29 @@
+{
+  "name": "mindtrace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/G-Hensley/mind-trace.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/G-Hensley/mind-trace/issues"
+  },
+  "homepage": "https://github.com/G-Hensley/mind-trace#readme",
+  "devDependencies": {
+    "@cypress/browserify-preprocessor": "^3.0.2",
+    "@types/node": "^24.3.1",
+    "@vitest/ui": "^3.2.4",
+    "cypress": "^15.1.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
