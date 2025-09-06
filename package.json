@@ -13,7 +13,8 @@
     "test:e2e": "cypress run",
     "test:all": "npm run test:run && npm run test:e2e",
     "format:check": "npx prettier --check .",
-    "format:fix": "npx prettier --write ."
+    "format:fix": "npx prettier --write .",
+    "server": "cd back-end && npm run dev"
   },
   "repository": {
     "type": "git",
