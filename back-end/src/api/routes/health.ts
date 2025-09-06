@@ -20,12 +20,10 @@ healthRoutes.get('/', async (req, res) => {
     });
   } catch (error) {
     console.error('Health check failed:', error);
-    res
-      .status(500)
-      .json({
-        status: 'error',
-        database: 'disconnected',
-        error: error instanceof Error ? error.message : 'Unknown error',
-      });
+    res.status(500).json({
+      status: 'error',
+      database: 'disconnected',
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
   }
 });
