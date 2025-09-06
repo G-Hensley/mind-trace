@@ -8,8 +8,8 @@ healthRoutes.get('/', async (req, res) => {
     // Test DB connection
     // Use a generic query to test DB connection, avoiding business table dependency
     const { data, error } = await supabase
-      .from('pg_catalog.pg_tables')
-      .select('tablename')
+      .from('profile')
+      .select('user_id')
       .limit(1);
     if (error) {
       throw error;
