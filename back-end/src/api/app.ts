@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import { errorHandler } from '../middleware/error';
 import { config } from '@/config/env';
+import { healthRoutes } from '@/api/routes/health';
 
 export const createApp = () => {
   const app = express();
@@ -20,12 +21,8 @@ export const createApp = () => {
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true }));
 
-  // Health check endpoint
-  app.get('/health', (req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() });
-  });
-
   // Routes will be added here in the future
+  app.use('/health', healthRoutes);
 
   // Error handling middleware will be added here in the future
   app.use(errorHandler);
