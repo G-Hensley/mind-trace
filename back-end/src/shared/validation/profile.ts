@@ -8,6 +8,11 @@ import {
   urlSchema,
   paginationSchema,
 } from './base';
+import {
+  createSearchQuerySchema,
+  createDateRangeSchema,
+  createBulkOperationSchema,
+} from './utils';
 
 export const createProfileSchema = z.object({
   userId: uuidSchema,
@@ -31,27 +36,25 @@ export const updateProfileSchema = z.object({
 export const profileSearchSchema = paginationSchema.extend({
   organizationId: uuidSchema.optional(),
   role: roleSchema.optional(),
-  query: z.string().min(1).max(100).trim().optional(),
+  query: createSearchQuerySchema(),
 });
 
 // Profile filters for admin dashboards
-export const profileFiltersSchema = z.object({
+export const profileFiltersSchema = paginationSchema.extend({
   organizationId: uuidSchema.optional(),
   role: roleSchema.optional(),
-  createdAfter: z.string().datetime().optional(),
-  createdBefore: z.string().datetime().optional(),
-  page: z.number().int().min(1).default(1),
-  limit: z.number().int().min(1).max(100).default(20),
+  hasAvatar: z.boolean().optional(),
+  ...createDateRangeSchema().shape,
 });
 
 // Bulk operations
-export const bulkUpdateProfilesSchema = z.object({
-  profileIds: z.array(uuidSchema).min(1).max(50),
-  updates: z.object({
+export const bulkUpdateProfilesSchema = createBulkOperationSchema(
+  z.object({
     organizationId: uuidSchema.optional(),
     role: roleSchema.optional(),
   }),
-});
+  50
+);
 
 // Profile validation for user settings
 export const updateProfileSettingsSchema = z.object({
@@ -72,9 +75,7 @@ export const profileParamsSchema = z.object({
   profileId: uuidSchema,
 });
 
-export const organizationProfilesSchema = z.object({
+export const organizationProfilesSchema = paginationSchema.extend({
   organizationId: uuidSchema,
-  page: z.number().int().min(1).default(1),
-  limit: z.number().int().min(1).max(100).default(20),
   role: roleSchema.optional(),
 });

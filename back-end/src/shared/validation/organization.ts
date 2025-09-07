@@ -4,10 +4,16 @@ import {
   uuidSchema,
   organizationNameSchema,
   paginationSchema,
-  isoDateStringSchema,
   roleSchema,
   emailSchema,
 } from './base';
+import {
+  createSearchQuerySchema,
+  createSortingSchema,
+  createDateRangeSchema,
+  createBulkOperationSchema,
+  createArraySchema,
+} from './utils';
 
 // Basic CRUD operations
 export const createOrganizationSchema = z.object({
@@ -21,23 +27,24 @@ export const updateOrganizationSchema = z.object({
 
 // Search and filtering
 export const organizationSearchSchema = paginationSchema.extend({
-  query: z.string().min(1).max(100).trim().optional(),
-  sortBy: z.enum(['name', 'created_at', 'member_count']).default('name'),
-  sortOrder: z.enum(['asc', 'desc']).default('asc'),
+  query: createSearchQuerySchema(),
+  ...createSortingSchema(
+    ['name', 'created_at', 'member_count'] as const,
+    'name'
+  ).shape,
 });
 
 // Advanced filtering for admin dashboards
-export const organizationFiltersSchema = z.object({
-  query: z.string().min(1).max(100).trim().optional(),
-  createdAfter: isoDateStringSchema.optional(),
-  createdBefore: isoDateStringSchema.optional(),
+export const organizationFiltersSchema = paginationSchema.extend({
+  query: createSearchQuerySchema(),
   minMembers: z.number().int().min(0).optional(),
   maxMembers: z.number().int().min(0).optional(),
   hasMembers: z.boolean().optional(),
-  page: z.number().int().min(1).default(1),
-  limit: z.number().int().min(1).max(100).default(20),
-  sortBy: z.enum(['name', 'created_at', 'member_count']).default('name'),
-  sortOrder: z.enum(['asc', 'desc']).default('asc'),
+  ...createSortingSchema(
+    ['name', 'created_at', 'member_count'] as const,
+    'name'
+  ).shape,
+  ...createDateRangeSchema().shape,
 });
 
 // Organization membership management
@@ -61,23 +68,22 @@ export const removeMemberSchema = z.object({
 // Bulk operations
 export const bulkAddMembersSchema = z.object({
   organizationId: uuidSchema,
-  members: z
-    .array(
-      z.object({
-        userId: uuidSchema,
-        role: roleSchema.default('user'),
-      })
-    )
-    .min(1)
-    .max(50),
+  members: createArraySchema(
+    z.object({
+      userId: uuidSchema,
+      role: roleSchema.default('user'),
+    }),
+    1,
+    50
+  ),
 });
 
-export const bulkUpdateOrganizationsSchema = z.object({
-  organizationIds: z.array(uuidSchema).min(1).max(20),
-  updates: z.object({
+export const bulkUpdateOrganizationsSchema = createBulkOperationSchema(
+  z.object({
     name: organizationNameSchema.optional(),
   }),
-});
+  20
+);
 
 // Organization settings/configuration
 export const organizationSettingsSchema = z.object({
@@ -97,10 +103,9 @@ export const organizationParamsSchema = z.object({
 // Organization statistics/analytics
 export const organizationStatsSchema = z.object({
   organizationId: uuidSchema,
-  dateFrom: isoDateStringSchema.optional(),
-  dateTo: isoDateStringSchema.optional(),
   includeMembers: z.boolean().default(true),
   includeActivity: z.boolean().default(false),
+  ...createDateRangeSchema().shape,
 });
 
 // Organization invitation

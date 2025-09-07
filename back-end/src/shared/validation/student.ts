@@ -7,6 +7,7 @@ import {
   isoDateStringSchema,
   paginationSchema,
 } from './base';
+import { createSearchQuerySchema, createArraySchema } from './utils';
 
 export const createStudentSchema = z.object({
   firstName: firstNameSchema,
@@ -25,11 +26,11 @@ export const updateStudentSchema = z.object({
 
 export const studentSearchSchema = paginationSchema.extend({
   organizationId: uuidSchema,
-  query: z.string().min(1).max(100).optional(),
+  query: createSearchQuerySchema(),
 });
 
 export const bulkCreateStudentsSchema = z.object({
-  students: z.array(createStudentSchema),
+  students: createArraySchema(createStudentSchema, 1, 100),
   organizationId: uuidSchema,
 });
 
