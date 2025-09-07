@@ -45,3 +45,7 @@ export const optional = <T extends z.ZodTypeAny>(schema: T) =>
 // Nullable wrapper for any schema
 export const nullable = <T extends z.ZodTypeAny>(schema: T) =>
   schema.nullable();
+
+// Content schemas
+export const moodSchema = z.string().min(1).max(50).trim();
+export const notesSchema = z.string().max(500).trim();
