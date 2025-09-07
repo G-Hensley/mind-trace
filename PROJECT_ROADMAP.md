@@ -5,7 +5,7 @@
 - ✅ Configure testing environment (Vitest + Cypress)
 - ✅ Set up backend API structure
 - ✅ Configure Supabase connection in backend only
-- [ ] Set up shared types and validation schemas
+- ✅ Set up shared types and validation schemas
 
 ## 👤 User Domain
 ### Entities
