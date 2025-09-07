@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { ZodObject, ZodRawShape, ZodType } from 'zod';
+import type { Request, Response, NextFunction } from 'express';
 
 // =============================================================================
 // COMMON VALIDATION UTILITIES
@@ -268,7 +269,7 @@ export const createValidationMiddleware = <T extends ZodType>(
   schema: T,
   property: 'body' | 'query' | 'params' = 'body'
 ) => {
-  return (req: any, res: any, next: any) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     try {
       req[property] = schema.parse(req[property]);
       next();
