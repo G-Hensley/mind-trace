@@ -6,11 +6,11 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: [
-      'back-end/**/*.{test,spec}.{js,ts}',
+      'back-end/src/**/*.{test,spec}.{js,ts}',
       'tests/unit/**/*.{test,spec}.{js,ts}',
       'tests/integration/**/*.{test,spec}.{js,ts}',
     ],
-    exclude: ['node_modules', 'dist', 'cypress', 'front-end'],
+    exclude: ['**/node_modules/**', 'dist', 'cypress', 'front-end'],
   },
   resolve: {
     alias: {
