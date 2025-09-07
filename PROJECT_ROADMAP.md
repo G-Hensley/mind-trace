@@ -9,7 +9,7 @@
 
 ## 👤 User Domain
 ### Entities
-- [ ] Base entity with validation
+- ✅ Base entity with validation
 - [ ] User entity with validation
 - [ ] Profile entity
 - [ ] Role/Permission entity
